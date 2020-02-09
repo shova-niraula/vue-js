@@ -5,11 +5,11 @@
             <AddPost v-on:addPost="addPost"></AddPost>
         </div>
         <div v-show="isEditPost">
-            <EditPost v-bind:editPost="editPost" v-on:updatePost="updatePost"
-                      v-on:cancelUpdate="cancelUpdate"></EditPost>
+            <EditPost :editPost="editPost" @updatePost="updatePost"
+                      @cancelUpdate="cancelUpdate"></EditPost>
         </div>
-        <Posts v-bind:posts="posts" v-bind="isEditPost" v-on:deletePost="deletePost"
-               v-on:setEditStatus="setEditStatus"></Posts>
+        <Posts :posts="posts" v-bind="isEditPost" @deletePost="deletePost"
+               @setEditStatus="setEditStatus"></Posts>
     </div>
 </template>
 
@@ -121,6 +121,6 @@
     }
 
     .container {
-        margin-bottom:20px;
+        margin-bottom: 20px;
     }
 </style>

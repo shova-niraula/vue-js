@@ -2,9 +2,9 @@
     <div>
         <h1>Posts</h1>
         <span>Total Post <b> {{totalNumberOfPosts()}}</b></span>
-        <div v-bind:key="post._id" v-for="post in posts">
-            <Post v-bind:post="post" v-bind="isEditPost" v-on:deletePost="$emit('deletePost', post._id)"
-                  v-on:setEditStatus="$emit('setEditStatus', post)"></Post>
+        <div :key="post._id" v-for="post in posts">
+            <Post :post="post" v-bind="isEditPost" @deletePost="$emit('deletePost', post._id)"
+                  @setEditStatus="$emit('setEditStatus', post)"></Post>
         </div>
 
     </div>
