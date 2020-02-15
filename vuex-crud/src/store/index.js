@@ -10,14 +10,21 @@ let url = 'https://arun-express-api.herokuapp.com/posts';
 export const store = new Vuex.Store({
     state: {
         editPost: false,
+        editPostRec: {},
         posts: []
     },
     mutations: {
         fetchPosts: (state, posts) => {
             state.posts = posts;
         },
-        editPost(state, status) {
-            state.editPost = status;
+        editPost(state, rec) {
+            state.editPost = rec.status;
+            state.editPostRec = {
+                _id: rec.editRecord._id,
+                title: rec.editRecord.title,
+                description: rec.editRecord.description
+            };
+
         },
         addPost(state, data) {
             state.posts = [...state.posts, data];
@@ -26,6 +33,17 @@ export const store = new Vuex.Store({
             state.posts = state.posts.filter((post) => {
                 return post._id !== id;
             })
+        },
+        saveEditedRecord(state) {
+            let updatedArr = [];
+            state.posts.forEach((post) => {
+                if (post._id === state.editPostRec._id) {
+                    post.title = state.editPostRec.title;
+                    post.description = state.editPostRec.description;
+                }
+                updatedArr.push(post);
+            })
+            state.posts = updatedArr;
         }
     },
     actions: {
@@ -43,8 +61,8 @@ export const store = new Vuex.Store({
          * Trigger edit state change
          * @param context
          */
-        editPost(context, status) {
-            context.commit('editPost', status);
+        editPost(context, status, editPostRec) {
+            context.commit('editPost', status, editPostRec);
         },
         addPost(context, data) {
             data = JSON.stringify(data)
@@ -56,6 +74,24 @@ export const store = new Vuex.Store({
             ).then(res => {
                 if (res) {
                     context.commit('addPost', res.data.record);
+                }
+            })
+        },
+        saveEditedRecord(context) {
+
+            let data = JSON.stringify({
+                _id: this.state.editPostRec._id,
+                title: this.state.editPostRec.title,
+                description: this.state.editPostRec.description
+            })
+            axios.put(url, data, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            ).then(res => {
+                if (res) {
+                    context.commit('saveEditedRecord');
                 }
             })
         },

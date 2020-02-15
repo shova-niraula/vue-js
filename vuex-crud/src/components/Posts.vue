@@ -10,15 +10,12 @@
             <h2>{{post.title}}</h2>
             <p>{{post.description}}</p>
             <button @click="deletePost(post._id)">Delete</button>
-            <button @click="editPost">Edit</button>
+            <button @click="editPost(post)">Edit</button>
         </div>
     </div>
 </template>
 
 <script>
-    // import Post from "./Post";
-    // import {mapGetters} from 'vuex';
-    // import {mapActions} from 'vuex';
 
     import AddPost from "./AddPost";
     import EditPost from "./EditPost";
@@ -41,8 +38,12 @@
             deletePost: function (id) {
                 this.$store.dispatch(('deletePost'), id);
             },
-            editPost: function () {
-                this.$store.dispatch(('editPost'), true);
+            editPost: function (editPostRec) {
+                let payload = {
+                    editRecord: editPostRec,
+                    status: true
+                }
+                this.$store.dispatch(('editPost'), payload);
             }
         }
 
