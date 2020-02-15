@@ -1,4 +1,4 @@
-# crud-op
+# vuex-crud
 
 ## Project setup
 ```
