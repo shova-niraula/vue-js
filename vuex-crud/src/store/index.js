@@ -14,9 +14,19 @@ export const store = new Vuex.Store({
         posts: []
     },
     mutations: {
+        /**
+         * Fetch post mutation
+         * @param state
+         * @param posts
+         */
         fetchPosts: (state, posts) => {
             state.posts = posts;
         },
+        /**
+         * Edit post mutation
+         * @param state
+         * @param rec
+         */
         editPost(state, rec) {
             state.editPost = rec.status;
             state.editPostRec = {
@@ -26,14 +36,28 @@ export const store = new Vuex.Store({
             };
 
         },
+        /**
+         * Add new post mutation
+         * @param state
+         * @param data
+         */
         addPost(state, data) {
             state.posts = [...state.posts, data];
         },
+        /**
+         * Delete new post mutation
+         * @param state
+         * @param id
+         */
         deletePost(state, id) {
             state.posts = state.posts.filter((post) => {
                 return post._id !== id;
             })
         },
+        /**
+         * Update post mutation
+         * @param state
+         */
         saveEditedRecord(state) {
             let updatedArr = [];
             state.posts.forEach((post) => {
@@ -64,6 +88,11 @@ export const store = new Vuex.Store({
         editPost(context, status, editPostRec) {
             context.commit('editPost', status, editPostRec);
         },
+        /**
+         * Add new post action
+         * @param context
+         * @param data
+         */
         addPost(context, data) {
             data = JSON.stringify(data)
             Vue.axios.post(url, data, {
@@ -77,6 +106,10 @@ export const store = new Vuex.Store({
                 }
             })
         },
+        /**
+         * Record update action
+         * @param context
+         */
         saveEditedRecord(context) {
 
             let data = JSON.stringify({
@@ -95,6 +128,11 @@ export const store = new Vuex.Store({
                 }
             })
         },
+        /**
+         * Delete action
+         * @param context
+         * @param id
+         */
         deletePost(context, id) {
             Vue.axios.delete(url, {
                     data: {

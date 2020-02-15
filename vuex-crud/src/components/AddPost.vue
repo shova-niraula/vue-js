@@ -2,7 +2,7 @@
     <div>
         <div id="addForm">
             <h5>Add new Post</h5>
-            <b-form v-on:submit.prevent="onSubmit">
+            <b-form @submit="onSubmit">
                 <b-form-group label="Title">
                     <b-form-input
                             id="input-1"
@@ -15,7 +15,7 @@
                     <b-textarea id="text-area1" type="description" required placeholder="Description" v-model="desc">
                     </b-textarea>
                 </b-form-group>
-                <b-button type="submit" variant="primary" style="margin-right: 10px">
+                <b-button type="submit" variant="primary" style="margin-right: 10px" @click="onSubmit">
                     Submit
                 </b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
@@ -34,11 +34,14 @@
             }
         },
         methods: {
-            onSubmit: function () {
+            onSubmit: function (event) {
+                event.preventDefault();
                 this.$store.dispatch(('addPost'), {
                     title: this.title,
                     description: this.desc
                 });
+                this.title = '';
+                this.desc = '';
             }
         }
     }

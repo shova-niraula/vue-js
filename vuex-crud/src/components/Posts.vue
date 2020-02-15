@@ -9,7 +9,7 @@
         <div :key="post._id" v-for="post in posts">
             <h2>{{post.title}}</h2>
             <p>{{post.description}}</p>
-            <button @click="deletePost(post._id)">Delete</button>
+            <button @click="deletePost(post._id)" style="margin-right: 10px">Delete</button>
             <button @click="editPost(post)">Edit</button>
         </div>
     </div>
