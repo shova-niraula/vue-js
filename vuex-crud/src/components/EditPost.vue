@@ -27,6 +27,8 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
+
     export default {
         name: "EditPost",
         data() {
@@ -44,11 +46,9 @@
                 this.$store.dispatch(('editPost'), false);
             }
         },
-        computed: {
-            getEditPost: function () {
-                return this.$store.state.editPostRec;
-            }
-        }
+        computed: mapState({
+            getEditPost: state => state.editPostRec
+        })
     }
 </script>
 

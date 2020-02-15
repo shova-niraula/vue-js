@@ -19,6 +19,7 @@
 
     import AddPost from "./AddPost";
     import EditPost from "./EditPost";
+    import {mapState} from 'vuex';
 
     export default {
         name: 'Posts',
@@ -26,14 +27,12 @@
         created() {
             this.$store.dispatch('fetchPosts');
         },
-        computed: {
-            posts: function () {
-                return this.$store.state.posts;
-            },
-            editStatus: function () {
-                return this.$store.state.editPost;
-            }
-        },
+        computed:
+            mapState(
+                {
+                    posts: state => state.posts,
+                    editStatus: state => state.editPost
+                }),
         methods: {
             deletePost: function (id) {
                 this.$store.dispatch(('deletePost'), id);
