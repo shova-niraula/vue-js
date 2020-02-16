@@ -1,4 +1,5 @@
 <template>
+
     <div>
         <div v-show="editStatus">
             <EditPost></EditPost>
@@ -9,8 +10,10 @@
         <div :key="post._id" v-for="post in posts">
             <h2>{{post.title}}</h2>
             <p>{{post.description}}</p>
-            <button @click="deletePost(post._id)" style="margin-right: 10px">Delete</button>
-            <button @click="editPost(post)">Edit</button>
+            <b-button @click="deletePost(post._id)" style="margin-right: 10px" variant="outline-primary">Delete
+            </b-button>
+            <b-button @click="editPost(post)" style="margin-right: 10px" variant="outline-primary">Edit</b-button>
+            <b-button :to="{ name: 'post', params: { id: post._id }}" variant="outline-primary">View</b-button>
         </div>
     </div>
 </template>

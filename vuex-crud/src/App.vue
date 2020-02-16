@@ -1,19 +1,18 @@
 <template>
     <div id="app" class="container">
-        <Post></Post>
+        <Header></Header>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import Post from './components/Posts.vue'
     import 'bootstrap/dist/css/bootstrap.css'
     import 'bootstrap-vue/dist/bootstrap-vue.css'
+    import Header from "./components/Header";
 
     export default {
         name: 'App',
-        components: {
-            Post
-        }
+        components: {Header}
     }
 </script>
 
