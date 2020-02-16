@@ -21,7 +21,22 @@ export const store = new Vuex.Store({
          */
         fetchPosts: (state, posts) => {
             state.posts = posts;
-        }
+        },
+        /**
+         * Edit post mutation
+         * @param state
+         * @param rec
+         */
+        editPost(state, rec) {
+            state.editPost = rec.status;
+            state.editPostRec = {
+                _id: rec.editRecord._id,
+                title: rec.editRecord.title,
+                description: rec.editRecord.description
+            };
+
+        },
+
     },
     actions: {
         /**
