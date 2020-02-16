@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div v-show="editStatus">
             <EditPost></EditPost>
@@ -7,7 +6,7 @@
         <div v-show="!editStatus">
             <AddPost></AddPost>
         </div>
-        <div :key="post._id" v-for="post in posts">
+        <div :key="post._id" v-for="post in posts" class="post-div">
             <h2>{{post.title}}</h2>
             <p>{{post.description}}</p>
             <b-button @click="deletePost(post._id)" style="margin-right: 10px" variant="outline-primary">Delete
@@ -51,3 +50,9 @@
 
     }
 </script>
+<style scoped>
+    .post-div {
+        margin: 10px;
+        padding: 10px;
+    }
+</style>
