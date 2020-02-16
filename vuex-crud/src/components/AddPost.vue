@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="addForm">
-            <h5>Add new Post</h5>
+            <h4 class="text-primary mt-3"> Add Post</h4>
             <b-form @submit="onSubmit">
                 <b-form-group label="Title">
                     <b-form-input

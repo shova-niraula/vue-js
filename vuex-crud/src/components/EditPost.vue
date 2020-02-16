@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3> Edit Post</h3>
+        <h4 class="text-primary mt-3"> Edit Post</h4>
         <div id="addForm">
             <b-form @submit="onSubmit">
                 <b-form-group label="Title">
