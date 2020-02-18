@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
     state: {
         editPost: false,
         editPostRec: {},
-        posts: []
+        posts: [],
+        filterPosts: []
     },
     mutations: {
         /**
@@ -21,7 +22,18 @@ export const store = new Vuex.Store({
          */
         fetchPosts: (state, posts) => {
             state.posts = posts;
+            state.filterPosts = posts;
         },
+        fetchFilterPosts: ((state, search) => {
+            if (!search) {
+                state.filterPosts = state.posts;
+            } else {
+                state.filterPosts = state.posts.filter(post => {
+                    return post.title.toLowerCase().indexOf(search) !== -1 ||
+                        post.description.toLowerCase().indexOf(search) !== -1;
+                })
+            }
+        }),
         /**
          * Edit post mutation
          * @param state
@@ -48,6 +60,14 @@ export const store = new Vuex.Store({
                 .then(res => {
                     context.commit('fetchPosts', res.data);
                 });
+        },
+        /**
+         * Filter record action
+         * @param context
+         * @param searchText
+         */
+        fetchFilterPosts(context, searchText) {
+            context.commit('fetchFilterPosts', searchText);
         },
         /**
          * Trigger edit state change
@@ -119,7 +139,6 @@ export const store = new Vuex.Store({
                     });
                 }
             });
-
         }
     }
 });
