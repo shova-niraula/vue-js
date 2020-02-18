@@ -22,7 +22,9 @@ export const store = new Vuex.Store({
          */
         fetchPosts: (state, posts) => {
             state.posts = posts;
-            state.filterPosts = posts;
+            if (state.filterPosts.length === 0) {
+                state.filterPosts = posts;
+            }
         },
         fetchFilterPosts: ((state, search) => {
             if (!search) {
