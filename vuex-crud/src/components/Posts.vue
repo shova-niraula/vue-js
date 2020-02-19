@@ -14,8 +14,9 @@
                     type="text"
                     placeholder="Search"
                     v-model="search"
-                    v-on:keyup="filterRecords"
+                    v-on:keyup="addSearchTextToState"
             ></b-form-input>
+
         </div>
 
         <div :key="post._id" v-for="post in filterPosts" class="post-div">
@@ -65,8 +66,9 @@
                 }
                 this.$store.dispatch(('editPost'), payload);
             },
-            filterRecords: function () {
-                this.$store.dispatch(('fetchFilterPosts'), this.search.toLowerCase());
+            addSearchTextToState: function () {
+                this.$store.state.searchText = this.search
+                this.$store.dispatch(('fetchFilterPosts'));
             }
         }
 
