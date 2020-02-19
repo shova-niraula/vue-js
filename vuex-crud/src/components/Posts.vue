@@ -19,7 +19,12 @@
 
         </div>
 
-        <div :key="post._id" v-for="post in filterPosts" class="post-div">
+        <div class="text-left" v-show="$store.state.spinner">
+            Loading .....
+            <b-spinner label="Loading..."></b-spinner>
+        </div>
+
+        <div v-show="!$store.state.spinner" :key="post._id" v-for="post in filterPosts" class="post-div">
             <h2>{{post.title}}</h2>
             <p>{{post.description}}</p>
             <b-button @click="deletePost(post._id)" style="margin-right: 10px" variant="outline-primary">Delete

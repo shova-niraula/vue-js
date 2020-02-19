@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
         editPostRec: {},
         posts: [],
         filterPosts: [],
-        searchText: ''
+        searchText: '',
+        spinner: true
     },
     mutations: {
         /**
@@ -28,9 +29,9 @@ export const store = new Vuex.Store({
             }
             // call filter
             store.commit('fetchFilterPosts');
+            state.spinner = false;
         },
         fetchFilterPosts: (state) => {
-
             if (!state.searchText) {
                 state.filterPosts = state.posts;
             } else {
@@ -62,6 +63,7 @@ export const store = new Vuex.Store({
          * @param context
          */
         fetchPosts(context) {
+            context.state.spinner = true;
             Vue.axios.get(url)
                 .then(res => {
                     context.commit('fetchPosts', res.data);
