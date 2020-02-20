@@ -13,7 +13,7 @@
                     id="input-1"
                     type="text"
                     placeholder="Search"
-                    v-model="search"
+                    v-model="$store.state.searchText"
                     v-on:keyup="addSearchTextToState"
             ></b-form-input>
 
@@ -72,7 +72,6 @@
                 this.$store.dispatch(('editPost'), payload);
             },
             addSearchTextToState: function () {
-                this.$store.state.searchText = this.search
                 this.$store.dispatch(('fetchFilterPosts'));
             }
         }
