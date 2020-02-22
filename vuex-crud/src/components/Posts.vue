@@ -27,10 +27,9 @@
         <div v-show="!$store.state.spinner" :key="post._id" v-for="post in filterPosts" class="post-div">
             <h2>{{post.title}}</h2>
             <p>{{post.description}}</p>
-            <b-button @click="deletePost(post._id)" style="margin-right: 10px" variant="outline-primary">Delete
-            </b-button>
-            <b-button @click="editPost(post)" style="margin-right: 10px" variant="outline-primary">Edit</b-button>
-            <b-button :to="{ name: 'post', params: { id: post._id }}" variant="outline-primary">View</b-button>
+            <b-button @click="deletePost(post._id)" variant="outline-primary">Delete</b-button>
+            <b-button @click="editPost(post)" variant="outline-primary">Edit</b-button>
+            <b-button :to="{name: 'post', params: {id: post._id}}" variant="outline-primary">View</b-button>
         </div>
     </div>
 </template>
@@ -78,10 +77,14 @@
 
     }
 </script>
-<style scoped>
+<style scoped lang="scss">
     .post-div {
         margin: 10px;
         padding: 10px;
+
+        button {
+            margin-right: 10px;
+        }
     }
 
     .md-form {
