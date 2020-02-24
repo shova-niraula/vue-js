@@ -7,6 +7,7 @@ import About from "./components/About";
 import Posts from "./components/Posts";
 import Post from "./components/Post";
 import NotFound from "./components/NotFound";
+import Login from "./components/user/Login";
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
@@ -18,8 +19,9 @@ Vue.use(IconsPlugin)
 
 const router = new VueRouter({
     routes: [
-        {path: '/', component: Posts},
-        {path: '/about', component: About},
+        {name: 'login', path: '/', component: Login},
+        {name: 'posts', path: '/posts', component: Posts},
+        {name: 'about', path: '/about', component: About},
         {name: 'post', path: '/post/:id', component: Post},
         {path: '*', component: NotFound}
     ],

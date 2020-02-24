@@ -5,7 +5,11 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 Vue.use(Vuex);
-let url = 'https://arun-express-api.herokuapp.com/posts';
+/**
+ * API URI
+ */
+let url = 'http://localhost:3000/posts';
+let userUri = 'http://localhost:3000/user';
 
 export const store = new Vuex.Store({
     state: {
@@ -14,9 +18,19 @@ export const store = new Vuex.Store({
         posts: [],
         filterPosts: [],
         searchText: '',
-        spinner: true
+        spinner: true,
+        token: '',
+        isAuthenticated: false
     },
     mutations: {
+        /**
+         * @param state
+         * @param data
+         */
+        saveToken: (state, data) => {
+            state.isAuthenticated = true;
+            state.token = data.token
+        },
         /**
          * Fetch post mutation
          * @param state
@@ -53,18 +67,29 @@ export const store = new Vuex.Store({
                 title: rec.editRecord.title,
                 description: rec.editRecord.description
             };
-
         },
 
     },
     actions: {
+        /**
+         *
+         * @param context
+         * @param username
+         * @param password
+         */
+        findUser(context, data) {
+            Vue.axios.post(userUri + "/find", data)
+                .then(res => {
+                    context.commit('saveToken', res.data);
+                });
+        },
         /**
          * Initial API call to fetch data
          * @param context
          */
         fetchPosts(context) {
             context.state.spinner = true;
-            Vue.axios.get(url)
+            Vue.axios.get(url, {headers: {authorization: `Bearer ${context.state.token}`}})
                 .then(res => {
                     context.commit('fetchPosts', res.data);
                 });
@@ -94,6 +119,7 @@ export const store = new Vuex.Store({
             Vue.axios.post(url, data, {
                     headers: {
                         'Content-Type': 'application/json',
+                        authorization: `Bearer ${context.state.token}`
                     }
                 }
             ).then(res => {
@@ -120,6 +146,7 @@ export const store = new Vuex.Store({
             axios.put(url, data, {
                     headers: {
                         'Content-Type': 'application/json',
+                        authorization: `Bearer ${context.state.token}`
                     }
                 }
             ).then(res => {

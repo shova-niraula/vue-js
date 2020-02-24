@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Header></Header>
         <div v-show="editStatus">
             <EditPost></EditPost>
         </div>
@@ -39,16 +40,21 @@
     import AddPost from "./AddPost";
     import EditPost from "./EditPost";
     import {mapState} from 'vuex';
+    import Header from "./Header";
 
     export default {
         name: 'Posts',
-        components: {AddPost, EditPost},
+        components: {Header, AddPost, EditPost},
         data() {
             return {
                 search: '',
             }
         },
         created() {
+            if (this.$store.state.isAuthenticated === false) {
+                this.$router.push({name: 'login'})
+
+            }
             this.$store.dispatch('fetchPosts');
         },
         computed:
