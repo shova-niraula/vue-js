@@ -8,6 +8,7 @@ import Posts from "./components/Posts";
 import Post from "./components/Post";
 import NotFound from "./components/NotFound";
 import Login from "./components/user/Login";
+import LoginOut from "./components/user/LoginOut";
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
@@ -23,6 +24,7 @@ const router = new VueRouter({
         {name: 'posts', path: '/posts', component: Posts},
         {name: 'about', path: '/about', component: About},
         {name: 'post', path: '/post/:id', component: Post},
+        {name: 'logout', path: '/logout', component: LoginOut},
         {path: '*', component: NotFound}
     ],
     mode: 'history'

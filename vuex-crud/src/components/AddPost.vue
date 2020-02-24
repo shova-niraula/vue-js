@@ -33,6 +33,11 @@
                 desc: ''
             }
         },
+        created() {
+            if (this.$store.state.isAuthenticated === false) {
+                this.$router.push({name: 'login'})
+            }
+        },
         methods: {
             onSubmit: function (event) {
                 event.preventDefault();

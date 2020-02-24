@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Header></Header>
         <h5>
             {{post.title}}
         </h5>
@@ -11,8 +12,11 @@
 </template>
 
 <script>
+    import Header from "./Header";
+
     export default {
         name: "Post",
+        components: {Header},
         data() {
             return {
                 post: {}

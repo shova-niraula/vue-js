@@ -1,10 +1,15 @@
 <template>
-    <div></div>
+    <div>Successfully Logged Out</div>
 </template>
 
 <script>
     export default {
-        name: "LoginOut"
+        name: "LoginOut",
+        created() {
+            this.$store.state.token = '';
+            this.$store.state.isAuthenticated = false;
+            this.$router.push({name: 'login'})
+        }
     }
 </script>
 

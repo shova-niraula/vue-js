@@ -77,8 +77,8 @@ export const store = new Vuex.Store({
          * @param username
          * @param password
          */
-        findUser(context, data) {
-            Vue.axios.post(userUri + "/find", data)
+        async findUser(context, data) {
+            await Vue.axios.post(userUri + "/find", data)
                 .then(res => {
                     context.commit('saveToken', res.data);
                 });
@@ -92,7 +92,11 @@ export const store = new Vuex.Store({
             Vue.axios.get(url, {headers: {authorization: `Bearer ${context.state.token}`}})
                 .then(res => {
                     context.commit('fetchPosts', res.data);
-                });
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            ;
         },
         /**
          * Filter record action
@@ -163,7 +167,12 @@ export const store = new Vuex.Store({
          * @param id
          */
         deletePost(context, id) {
+
             Vue.axios.delete(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        authorization: `Bearer ${context.state.token}`
+                    },
                     data: {
                         _id: id
                     }

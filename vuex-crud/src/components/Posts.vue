@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  v-cloak>
         <Header></Header>
         <div v-show="editStatus">
             <EditPost></EditPost>
@@ -50,10 +50,12 @@
                 search: '',
             }
         },
+        beforeMount() {
+
+        },
         created() {
             if (this.$store.state.isAuthenticated === false) {
                 this.$router.push({name: 'login'})
-
             }
             this.$store.dispatch('fetchPosts');
         },
@@ -97,4 +99,6 @@
         padding: 20px;
         width: 50%;
     }
+    [v-cloak] {display: none}
+
 </style>

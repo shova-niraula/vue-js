@@ -1,20 +1,19 @@
 <template>
-    <div v-show="!$store.getters.isAuthenticated">
+    <div v-show="!$store.getters.isAuthenticated" class="login">
+
         <form @submit.prevent="login">
             <div class="form-group">
                 <label>Username</label>
                 <input type="username"
+                       id="input-username"
                        class="form-control" placeholder="Enter username" v-model="username">
                 <small id="usernameHelp" class="form-text text-muted">We'll never share your username with anyone
                     else.</small>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password" v-model="password">
-            </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                <input type="password" id="input-password" class="form-control" placeholder="Password"
+                       v-model="password">
             </div>
             <button type="submit" class="btn btn-primary" style="margin-right: 20px">Submit</button>
             <button type="button" class="btn btn-primary">Register</button>
@@ -32,16 +31,18 @@
             }
         },
         created() {
-            alert(this.$store.state.isAuthenticated)
             if (this.$store.state.isAuthenticated === true) {
                 this.$router.push({name: 'posts'})
             }
         },
         methods: {
-            login: function () {
+            login: function (event) {
+                event.preventDefault();
                 this.$store.dispatch(('findUser'), {
                     username: this.username,
                     password: this.password
+                }).then(() => {
+                    this.$router.push({name: 'posts'})
                 });
             }
 
@@ -49,6 +50,8 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .login {
+        margin: 30px;
+    }
 </style>
