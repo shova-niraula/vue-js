@@ -16,7 +16,7 @@
                        v-model="password">
             </div>
             <button type="submit" class="btn btn-primary" style="margin-right: 20px">Submit</button>
-            <button type="button" class="btn btn-primary">Register</button>
+            <button type="button" class="btn btn-primary" @click="register">Register</button>
         </form>
     </div>
 </template>
@@ -49,6 +49,9 @@
                 }).then(() => {
                     this.$router.push({name: 'posts'})
                 });
+            },
+            register: function () {
+                this.$router.push({name: 'register'})
             }
 
         }

@@ -9,6 +9,7 @@ import Post from "./components/Post";
 import NotFound from "./components/NotFound";
 import Login from "./components/user/Login";
 import LoginOut from "./components/user/LoginOut";
+import RegisterUser from "./components/user/RegisterUser";
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
@@ -21,6 +22,7 @@ Vue.use(IconsPlugin)
 const router = new VueRouter({
     routes: [
         {name: 'login', path: '/', component: Login},
+        {name: 'register', path: '/register', component: RegisterUser},
         {name: 'posts', path: '/posts', component: Posts},
         {name: 'about', path: '/about', component: About},
         {name: 'post', path: '/post/:id', component: Post},
