@@ -31,6 +31,11 @@
             }
         },
         created() {
+            if (localStorage.getItem('token')) {
+                this.$store.state.token = localStorage.getItem('token');
+                this.$store.state.isAuthenticated = true;
+                this.$router.push({name: 'posts'})
+            }
             if (this.$store.state.isAuthenticated === true) {
                 this.$router.push({name: 'posts'})
             }

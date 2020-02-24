@@ -8,6 +8,7 @@
         created() {
             this.$store.state.token = '';
             this.$store.state.isAuthenticated = false;
+            localStorage.setItem('token', '');
             this.$router.push({name: 'login'})
         }
     }

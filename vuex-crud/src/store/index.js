@@ -29,7 +29,8 @@ export const store = new Vuex.Store({
          */
         saveToken: (state, data) => {
             state.isAuthenticated = true;
-            state.token = data.token
+            state.token = data.token;
+            localStorage.setItem('token', data.token);
         },
         /**
          * Fetch post mutation
@@ -72,7 +73,7 @@ export const store = new Vuex.Store({
     },
     actions: {
         /**
-         *
+         * Login should be async await.
          * @param context
          * @param username
          * @param password
