@@ -72,6 +72,16 @@ export const store = new Vuex.Store({
 
     },
     actions: {
+        addUser(context, data) {
+            Vue.axios.post(userUri + "/add", data).then(res => {
+                if (res) {
+                    if (res.status === 200) {
+                        return res.data;
+                    }
+                }
+            })
+        },
+
         /**
          * Login should be async await.
          * @param context
