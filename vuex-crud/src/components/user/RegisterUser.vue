@@ -26,7 +26,7 @@
                        v-model="password_again">
             </div>
             <button type="submit" class="btn btn-primary" style="margin-right: 20px">Register</button>
-            <button type="reset" class="btn btn-primary">Reset</button>
+            <button type="reset" class="btn btn-primary" @click="reset">Reset</button>
         </form>
     </div>
 </template>
@@ -58,7 +58,14 @@
                 this.password = '';
                 event.preventDefault();
             },
+            reset: () => {
+                this.errors = [];
+                this.username = '';
+                this.password = '';
+                this.password_again = '';
+            },
             validateForm: function () {
+                this.errors = [];
                 if (!this.username) {
                     this.errors.push({id: 'error1', text: 'Name required.'});
                 }
